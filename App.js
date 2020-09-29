@@ -1,24 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+import HomeScreen from './src/screens/HomeScreen'
+import LoadingScreen from './src/screens/LoadingScreen'
+import SplashScreen from './src/screens/SplashScreen'
+import {Provider as AuthPtovider} from './src/context/AuthContext'
+import LoginScreen from './src/screens/LoginScreen'
+import {setNavigator} from './src/navigationRef'
 
-export default function App() {
+const stackNavigator = createSwitchNavigator({
+  Loading: LoadingScreen,
+  Splash: SplashScreen,
+  loginFlow: createStackNavigator({
+    Login: LoginScreen
+  }),
+  mainFlow: createStackNavigator({
+    Home: HomeScreen
+  })
+
+})
+
+const App = createAppContainer(stackNavigator)
+
+export default () => {
   return (
-    <View style={styles.container}>
-      <Text>SmokeCheck2.0 !!!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <AuthPtovider>
+      <App
+        ref={(navigator) => {
+          setNavigator(navigator)
+        }}
+        />
+    </AuthPtovider>
+    
+  )
 }
-
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
