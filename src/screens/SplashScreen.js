@@ -1,26 +1,82 @@
-import React, {useEffect} from 'react'
-import { View, AsyncStorage, Text, Image, StyleSheet } from 'react-native'
+import React, {useEffect, useContext} from 'react'
+import { View, Text, Image, StyleSheet } from 'react-native'
+import Constants from 'expo-constants';
+import {API_URL} from '../services/routes'
+import {Context as AuthContext } from '../context/AuthContext'
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 const SplashScreen = ({navigation}) => {
+    const {saveUser} = useContext(AuthContext)
+    console.log('USERRR');
+
+    
+
+    const checkStorageState = async () => {
+
+      let delay = 1500;
+      let animationDuration = 400;
+
+      const token = await AsyncStorage.getItem('token');
+      console.log('token', token);
+      if (!token) {
+        setTimeout(
+          () =>
+          navigation.navigate('Login', {
+            animation: 'fade',
+            duration: animationDuration
+          }),
+          delay
+        )
+      } 
+      else {
+        const user = await AsyncStorage.getItem('user');
+        console.log('user', user);
+        if (!user) {
+          setTimeout(
+            () =>
+            navigation.navigate('StepInit', {
+              animation: 'fade',
+              duration: animationDuration
+            }),
+            delay
+          )
+        } else {
+          setTimeout(() => {
+            saveUser(JSON.parse(user))
+            navigation.navigate('Home', {
+              animation: 'fade',
+              duration: animationDuration
+            })
+          }, delay)
+          
+        }
+      }
+    }
+
     useEffect(() => {
-        setTimeout(() => {
-            navigation.navigate('Home')
-        }, 5000)
+
+      checkStorageState()
+
     }, [])
 
-    // const getEnv = () => {
-    //     return API_URL.match(/(qa|demo|test)/g)
-    // }
+    const getEnv = () => {
+        return API_URL.match(/(qa|demo|test)/g)
+    }
+
+
+    const version = Object.keys(Constants.platform).includes('ios') ? Constants.platform['ios'].systemVersion : Constants.platform['android'].versionCode;
 
     return (
         <View style={styles.wrapper}>
             <View>
+                
                 <Image style={styles.iconLungSketch} source={require('../../assets/lung_sketch.png')} />
             </View>
             <Image style={styles.logoSmokeCheck} source={require('../../assets/white_logo.png')} />
             <Text style={styles.appInfoText}>
                 Votre outil de dépistage des maladies liées à la consommation du tabac.</Text>
+            <Text style={styles.versionText}>Version: {version} {getEnv()}</Text> 
             <Image style={styles.iconCE} source={require('../../assets/CE.png')}/>
         </View>
     )
@@ -34,8 +90,7 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
     },
     versionText: {
-      top: 20 * 0.82,
-      left: 10 * 0.82,
+     textAlign: 'center',
       color: 'white',
     },
     iconLungSketch: {
