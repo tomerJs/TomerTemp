@@ -1,46 +1,43 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   Animated,
   Dimensions,
 } from 'react-native'
 
-class FromSide extends React.Component {
-  constructor (props) {
-    super(props)
-    let width = Dimensions.get('window').width
+const FromSide = (props) => {
+  let width = Dimensions.get('window').width
 
-    if (this.props.side === 'left') {
-      width = width * -1
-    }
-
-    this.state = {
-      anim: new Animated.ValueXY({x: width, y: 0}),
-    }
+  if (props.side === 'left') {
+    width = width * -1
   }
+  // const [anim, setAnim] = useState(new Animated.ValueXY({x: width, y: 0}))
+ 
+  const anim = useRef(new Animated.ValueXY({x: width, y: 0})).current
 
-  componentDidMount () {
+  useEffect(() => {
     Animated.timing(
-      this.state.anim,
+      anim,
       {
         toValue: {x: 0, y: 0},
-        duration: this.props.duration !== undefined ? this.props.duration : 300,
-        delay: this.props.delay !== undefined ? this.props.delay : 0,
+        duration: props.duration !== undefined ? props.duration : 300,
+        delay: props.delay !== undefined ? props.delay : 0,
+        useNativeDriver: true
       },
     ).start()
-  }
+  }, [])
 
-  render () {
-    return (
-      <Animated.View
-        style={[
-          this.props.style,
-          { transform: this.state.anim.getTranslateTransform() },
-        ]}
-      >
-        {this.props.children}
-      </Animated.View>
-    )
-  }
+
+
+  return (
+    <Animated.View
+      style={[
+        props.style,
+        { transform: anim.getTranslateTransform() },
+      ]}
+    >
+      {props.children}
+    </Animated.View>
+  )
 }
 
 export default FromSide

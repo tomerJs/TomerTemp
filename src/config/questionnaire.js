@@ -1,0 +1,105 @@
+export const YES_NO_RESPONSES = [
+  {
+    answer: 'Non',
+    value: 0,
+  },
+  {
+    answer: 'Oui',
+    value: 1,
+  },
+]
+
+export default [
+  {
+    id: 0,
+    number: '1',
+    name: 'weight_loss',
+    message: 'Avez-vous perdu 3kg ou plus ces 3 derniers mois ? (Si vous faites un régime ou avez eu un stress ces derniers jours ayant réduit votre appétit, tapez non)',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 1,
+    number: '2',
+    name: 'cough',
+    message: 'Toussez-vous depuis 3 semaines ou plus ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 2,
+    number: '3',
+    name: 'unusual_tiredness',
+    message: 'Ressentez-vous une fatigue inhabituelle persistante depuis 3 semaines ou plus ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 3,
+    number: '4',
+    name: 'unusual_breathlessness',
+    message: 'Avez-vous, depuis 3 semaines ou plus, un essoufflement inhabituel à la marche en terrain plat en comparaison de quelqu\'un du même âge ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 4,
+    number: '5',
+    name: 'need_to_spit',
+    message: 'Ressentez-vous le besoin de cracher souvent depuis 3 semaines ou plus ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 5,
+    number: '6',
+    name: 'dysphonia',
+    message: 'Avez-vous actuellement une modification de votre voix et qui dure depuis plus de 3 semaines ou plus ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 6,
+    number: '7',
+    name: 'skin_nodule',
+    message: 'Avez-vous récemment remarqué l\'apparition d\'une boule inhabituelle sous la peau ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 7,
+    number: '8',
+    name: 'hemoptysis',
+    message: 'Dans les 3 dernières semaines, avez-vous observé la présence de sang dans vos crachats ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 8,
+    number: '9',
+    name: 'blood_urine',
+    message: 'Dans les 3 dernières semaines, avez-vous observé la présence de sang dans vos urines ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 9,
+    number: '10',
+    name: 'trouble_swallowing',
+    message: 'Avez-vous des difficultés persistantes à avaler les aliments depuis 3 semaines ou plus ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 10,
+    number: '11',
+    name: 'chest_or_shoulder_unusual_persistent_pain',
+    message: 'Avez-vous une douleur à une épaule ou dans la poitrine, inhabituelle et persistante depuis 3 semaines ou plus ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 11,
+    number: '12',
+    name: 'chest_compression',
+    message: 'Avez-vous eu ces 3 dernières semaines une douleur ou une sensation d\'étau dans la poitrine pendant un effort ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  }, {
+    id: 12,
+    number: '13',
+    name: 'leg_pain',
+    message: 'Avez-vous eu dans les dernières semaines une douleur à 1 ou 2 jambes survenant à la marche et imposant l\'arrêt de l\'effort ?',
+    answers: YES_NO_RESPONSES,
+    type: 'CHOICE',
+  },
+]

@@ -4,8 +4,11 @@ import {
 } from 'react-native'
 
 const FadeInView = (props) => {
-  const [fadeAnim, setFadeAnime] = useState(new Animated.Value(0))
-  const [translateYAnim, setTranslateYAnim] = useState(new Animated.ValueXY({x: 0, y: -30}))
+  // const [fadeAnim, setFadeAnime] = useState(new Animated.Value(0))
+  // const [translateYAnim, setTranslateYAnim] = useState(new Animated.ValueXY({x: 0, y: -30}))
+
+  const fadeAnim = useRef(new Animated.Value(0)).current
+  const translateYAnim = useRef(new Animated.ValueXY({x: 0, y: -30})).current
 
   useEffect(() => {
     Animated.parallel([

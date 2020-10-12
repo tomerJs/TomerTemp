@@ -8,11 +8,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const SplashScreen = ({navigation}) => {
     const {saveUser} = useContext(AuthContext)
-    console.log('USERRR');
 
-    
 
     const checkStorageState = async () => {
+
+      //Remove!
+      await AsyncStorage.removeItem('token')
+      await AsyncStorage.removeItem('user')
 
       let delay = 1500;
       let animationDuration = 400;

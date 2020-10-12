@@ -12,6 +12,8 @@ import StepInitScreen from './src/screens/StepInitScreen'
 import StepConsentScreen from './src/screens/StepConsentScreen'
 import StepInfoScreen from './src/screens/StepInfoScreen'
 import StepFormUserScreen from './src/screens/StepFormUserScreen'
+import StepSummaryScreen from './src/screens/StepSummaryScreen'
+import { LogBox } from 'react-native';
 
 const stackNavigator = createSwitchNavigator({
   // Loading: LoadingScreen,
@@ -24,7 +26,8 @@ const stackNavigator = createSwitchNavigator({
     StepInit: StepInitScreen,
     StepConsent: StepConsentScreen,
     StepInfo: StepInfoScreen,
-    StepFormUser: StepFormUserScreen
+    StepFormUser: StepFormUserScreen,
+    StepSummary: StepSummaryScreen,
   }),
   mainFlow: createStackNavigator({
     Home: HomeScreen
@@ -35,6 +38,7 @@ const stackNavigator = createSwitchNavigator({
 const App = createAppContainer(stackNavigator)
 
 export default () => {
+  // LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
   return (
     <AuthPtovider>
       <App

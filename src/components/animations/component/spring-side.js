@@ -1,45 +1,41 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   Animated,
   Dimensions,
 } from 'react-native'
 
-class SpringSide extends React.Component {
-  constructor (props) {
-    super(props)
-    let width = Dimensions.get('window').width
+const SpringSide = (props) => {
+  let width = Dimensions.get('window').width
 
-    if (this.props.side === 'left') {
-      width = width * -1
-    }
-
-    this.state = {
-      anim: new Animated.ValueXY({x: width, y: 0}),
-    }
+  if (this.props.side === 'left') {
+    width = width * -1
   }
+  // const [anim, setAnim] = useState(new Animated.ValueXY({x: width, y: 0}))
+  const anim = useRef(new Animated.ValueXY({x: width, y: 0})).current
 
-  componentDidMount () {
+
+  useEffect(() => {
     Animated.sequence([
-      Animated.delay(this.props.delay ? this.props.delay : 0),
+      Animated.delay(props.delay ? props.delay : 0),
       Animated.spring(
-        this.state.anim,
-        {toValue: {x: 0, y: 0}}
+        anim,
+        {toValue: {x: 0, y: 0}, useNativeDriver: true}
       ),
     ]).start()
-  }
+  }, [])
 
-  render () {
-    return (
-      <Animated.View
-        style={[
-          { transform: this.state.anim.getTranslateTransform() },
-          this.props.style,
-        ]}
-      >
-        {this.props.children}
-      </Animated.View>
-    )
-  }
+
+  return (
+    <Animated.View
+      style={[
+        { transform: anim.getTranslateTransform() },
+        props.style,
+      ]}
+    >
+      {props.children}
+    </Animated.View>
+  )
+  
 }
 
 export default SpringSide

@@ -211,7 +211,7 @@ const LoginScreen = ({navigation}) => {
     const modifyPhone = () => {
       textInput.current.setNativeProps({ text: '' })
       textInput.current.focus();
-      setEenterCode(false)
+      setEnterCode(false)
       setPhoneNumber('')
     
     }
