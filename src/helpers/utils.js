@@ -33,11 +33,11 @@ export const Isinvalid = (name, value) => {
 }
 
 export const getToken = async() => {
-  token = await AsyncStorage.getItem('token')
+  let token = await AsyncStorage.getItem('token')
   return token ? token : ""
 }
 
 export const getConsentText = async() => {
-  consent_text = await AsyncStorage.getItem('consent_text')
+  let consent_text = await AsyncStorage.getItem('consent_text')
   return consent_text ? consent_text : ""
 }

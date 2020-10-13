@@ -1,10 +1,12 @@
 import React from 'react'
+import 'react-native-gesture-handler';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import HomeScreen from './src/screens/HomeScreen'
 import LoadingScreen from './src/screens/LoadingScreen'
 import SplashScreen from './src/screens/SplashScreen'
-import {Provider as AuthPtovider} from './src/context/AuthContext'
+import {Provider as AuthProvider} from './src/context/AuthContext'
+import {Provider as QuestionProvider} from './src/context/QuestionContext'
 import LoginScreen from './src/screens/LoginScreen'
 import {setNavigator} from './src/navigationRef'
 import SuccessLogin from './src/screens/SuccessLogin'
@@ -14,6 +16,12 @@ import StepInfoScreen from './src/screens/StepInfoScreen'
 import StepFormUserScreen from './src/screens/StepFormUserScreen'
 import StepSummaryScreen from './src/screens/StepSummaryScreen'
 import { LogBox } from 'react-native';
+import LegalScreen from './src/screens/LegalScreen'
+import QuestionnaireScreen from './src/screens/QuestionnaireScreen'
+import SummaryScreen from './src/screens/SummaryScreen'
+import ResultScreen from './src/screens/ResultScreen';
+
+
 
 const stackNavigator = createSwitchNavigator({
   // Loading: LoadingScreen,
@@ -30,7 +38,11 @@ const stackNavigator = createSwitchNavigator({
     StepSummary: StepSummaryScreen,
   }),
   mainFlow: createStackNavigator({
-    Home: HomeScreen
+    Home: HomeScreen,
+    Legal: LegalScreen,
+    Questionnaire: QuestionnaireScreen,
+    Summary: SummaryScreen,
+    Result: ResultScreen
   })
 
 })
@@ -40,13 +52,15 @@ const App = createAppContainer(stackNavigator)
 export default () => {
   // LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
   return (
-    <AuthPtovider>
+    <AuthProvider>
+      <QuestionProvider>
       <App
         ref={(navigator) => {
           setNavigator(navigator)
         }}
-        />
-    </AuthPtovider>
+      />
+      </QuestionProvider>
+    </AuthProvider>
     
   )
 }

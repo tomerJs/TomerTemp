@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   Animated,
   Easing,
@@ -12,61 +12,55 @@ const computeProgressBarSize = (index, nbOfQuestions, ratioX) => {
   return (index * 357 / nbOfQuestions) * ratioX
 }
 
-class Footer extends React.Component {
-  constructor (props) {
-    super(props)
-    const width = computeProgressBarSize(props.index, props.nbOfQuestions, RATIO_X)
-    this.state = {
-      width: width,
-      progress: new Animated.Value(width),
-      paddingLeft: 10,
-    }
-  }
+const Footer = (props) =>  {
+  const width = computeProgressBarSize(props.index, props.nbOfQuestions, RATIO_X)
+  const [widthState, setWidthState] = useState(width)
+  const [progressState, setProgressState] = useState(new Animated.Value(width))
+  const [paddingLeftState, setPaddingLeftState] = useState(10)
 
-  componentDidUpdate (prevProps, prevState) {
-    if (this.props.index !== prevProps.index) {
-      const width = computeProgressBarSize(this.props.index, this.props.nbOfQuestions, RATIO_X)
+  useEffect(() => {
+    if (props.index) {
+      const width = computeProgressBarSize(props.index, props.nbOfQuestions, RATIO_X)
 
-      let paddingLeft = this.state.paddingLeft
-      if (this.props.index === 2) {
+      let paddingLeft = paddingLeftState
+      if (props.index === 2) {
         paddingLeft = 15
-      } else if (this.props.index === this.props.nbOfQuestions - 1) {
+      } else if (props.index === props.nbOfQuestions - 1) {
         paddingLeft = 30
-      } else if (this.props.index === this.props.nbOfQuestions) {
+      } else if (props.index === props.nbOfQuestions) {
         paddingLeft = 40
       }
 
-      this.setState({width: width, paddingLeft: paddingLeft})
+      setWidthState(width)
+      setPaddingLeftState(paddingLeft)
 
-      Animated.timing(this.state.progress, {
+      Animated.timing(progressState, {
         easing: Easing.inOut(Easing.ease),
         duration: 400,
         toValue: width,
         useNativeDriver: true,
       }).start()
     }
-  }
+  }, [props.index])
 
-  render () {
-    let fillWidth = this.state.progress.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 1],
-    })
-    return (
+  let fillWidth = progressState.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  })
+  return (
+    <View>
       <View>
-        <View>
-          <Text
-            accessibilityLabel={`text_back_to_question_${this.props.index}`}
-            style={[styles.text, {paddingLeft: this.state.width - this.state.paddingLeft}]}>
-            {this.props.index} sur {this.props.nbOfQuestions}
-          </Text>
-          <View style={styles.progressBar} >
-            <Animated.View style={[styles.progressBarActive]}></Animated.View>
-          </View>
+        <Text
+          accessibilityLabel={`text_back_to_question_${props.index}`}
+          style={[styles.text, {paddingLeft: widthState - paddingLeftState}]}>
+          {props.index} sur {props.nbOfQuestions}
+        </Text>
+        <View style={styles.progressBar} >
+          <Animated.View style={[styles.progressBarActive]}></Animated.View>
         </View>
       </View>
-    )
-  }
+    </View>
+  )
 }
 
 export default Footer

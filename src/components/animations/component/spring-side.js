@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {
   Animated,
   Dimensions,
@@ -7,7 +7,7 @@ import {
 const SpringSide = (props) => {
   let width = Dimensions.get('window').width
 
-  if (this.props.side === 'left') {
+  if (props.side === 'left') {
     width = width * -1
   }
   // const [anim, setAnim] = useState(new Animated.ValueXY({x: width, y: 0}))

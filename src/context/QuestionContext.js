@@ -3,7 +3,6 @@ import createDataContext from './createDataContext';
 const questionReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_ANSWER':
-      case ADD_ANSWER:
       const {question, userAnswer} = action.payload
       const answer = {
         questionId: question.id,
@@ -38,7 +37,7 @@ const questionReducer = (state, action) => {
   }
 };
 
-const addAnswer = (dispatch) => () => {
+const addAnswer = (dispatch) => (question, userAnswer) => {
   dispatch({
     type: 'ADD_ANSWER',
     payload: {
@@ -49,14 +48,18 @@ const addAnswer = (dispatch) => () => {
 };
 
 
-export const removeAnswer = (questionNumber) => ({
-  type: 'DELETE_ANSWER',
-  questionNumber,
-})
+const removeAnswer = (dispatch) => (questionNumber) => {
+  dispatch({
+    type: 'DELETE_ANSWER',
+    questionNumber,
+  });
+}
 
-export const resetAnswers = () => ({
-  type: 'RESET_ANSWERS',
-})
+const resetAnswers = (dispatch) => () => {
+  dispatch({
+    type: 'RESET_ANSWERS',
+  });
+}
 
 export const { Context, Provider } = createDataContext(
   questionReducer,

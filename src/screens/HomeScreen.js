@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import moment from 'moment-with-locales-es6';
 import FadeInView from '../components/animations/component/fade-in-view'
 import { getAppPoint } from '../services/index'
-import {blue, darkGray, lightGray, gray} from '../helpers/colors'
-import {RATIO_X, RATIO_Y, RATIO } from '../helpers/dimension'
+import {darkGray} from '../helpers/colors'
+import {RATIO_X, RATIO_Y } from '../helpers/dimension'
 import Navbar from '../components/navbar/component'
 import Button from '../components/button/component'
 import SimpleButton from '../components/simple-button/component'
@@ -150,7 +150,7 @@ const HomeScreen = ({navigation}) => {
                     accessibilityLabel={`button_legal`}
                     hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                     // onPress={() => Actions.legal()}
-                    onPress={() => console.log('Go to legal')}
+                    onPress={() => navigation.navigate('Legal')}
                   >
                     <Text accessibilityLabel={`text_legal`} style={styles.legalText}>Mentions légales</Text>
                   </TouchableOpacity>

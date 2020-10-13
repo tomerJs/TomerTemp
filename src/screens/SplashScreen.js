@@ -11,11 +11,8 @@ const SplashScreen = ({navigation}) => {
 
 
     const checkStorageState = async () => {
-
-      //Remove!
-      await AsyncStorage.removeItem('token')
-      await AsyncStorage.removeItem('user')
-
+      // await AsyncStorage.removeItem('token')
+      // await AsyncStorage.removeItem('user')
       let delay = 1500;
       let animationDuration = 400;
 

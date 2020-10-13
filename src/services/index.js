@@ -37,7 +37,7 @@ export function sendOtp(data, sendOtpToken) {
 }
 
 export async function getAppPoint(data) {
-  token = await getToken()
+  let token = await getToken()
   const dataToSend = getDataPackage(data, token, method = 'GET')
   return fetch(apiGetAppPoint, dataToSend)
     .then(response => response.json())
@@ -67,7 +67,7 @@ export function checkOtp(data) {
 }
 
 export async function addSmoker(data) {
-  token = await getToken()
+  let token = await getToken()
   const dataTransformed = await transformAddSmokerData(data)
   const dataToSend = getDataPackage(dataTransformed, token)
   return fetch(apiAddSmoker, dataToSend)
@@ -83,7 +83,7 @@ export async function addSmoker(data) {
 }
 
 export async function sendQuestionnaire(data) {
-  token = await getToken()
+  let token = await getToken()
   const dataTransformed = transformSendQuestionnaireData(data)
   const dataToSend = getDataPackage(dataTransformed, token)
   return fetch(apiSendQuestionnaire, dataToSend)
@@ -99,7 +99,7 @@ export async function sendQuestionnaire(data) {
 }
 
 export async function checkAlert(data) {
-  token = await getToken()
+  let token = await getToken()
   const dataToSend = getDataPackage(data, token)
   return fetch(apiCheckAlert, dataToSend)
     .then(response => response.json())
@@ -114,7 +114,7 @@ export async function checkAlert(data) {
 }
 
 export async function getHistory(data) {
-  token = await getToken()
+  let token = await getToken()
   const dataToSend = getDataPackage(data, token, method = 'GET')
   return fetch(apiGetHistory, dataToSend)
     .then(response => response.json())

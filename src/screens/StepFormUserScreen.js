@@ -19,7 +19,6 @@ const StepFormUserScreen = ({navigation}) => {
     const [userState, setUserState] = useState({})
     const [responsesState, setResponses] = useState({})
     const {saveUser} = useContext(AuthContext)
-    const questionContext = useContext(QuestionContext)
 
     let userProp = navigation.getParam('user')
     let questionIndex = navigation.getParam('questionIndex')
@@ -42,9 +41,7 @@ const StepFormUserScreen = ({navigation}) => {
     const nextQuestion = (id, value) => {
         let _questionIndex = questionIndexState + 1
         let user = userProp ? userProp : userState
-    
-        console.log('VALLLLL', value
-        );
+  
         
         let responses = responsesState
         responses[id] = value

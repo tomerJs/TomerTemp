@@ -2,10 +2,10 @@
 // const API_URL = 'REPLACE ME'
 
 // ATE - APP Build 1
-export const API_URL = 'https://app.smokecheck.fr/'
+// export const API_URL = 'https://app.smokecheck.fr/'
 
 // AWS - VALIDATION Build 2
-// export const API_URL = 'https://qa-app.smokecheck.fr/'
+export const API_URL = 'https://qa-app.smokecheck.fr/'
 
 // AWS - DEMO Build 3
 // export const API_URL = 'https://demo-app.smokecheck.fr/'

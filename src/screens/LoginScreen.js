@@ -145,6 +145,7 @@ const LoginScreen = ({navigation}) => {
         }
         console.log('verifyCode#####', data);
         const response = await checkOtp(data)
+        console.log('RES!!!', response);
         if (response.status !== 200) {
           failed(response.error)
 
@@ -217,8 +218,10 @@ const LoginScreen = ({navigation}) => {
     }
 
     const getSubmitAction = () => {
+
       Keyboard.dismiss()
       enterCode ? verifyCode() : confirmPhoneNumber();
+
     }
   
     const changeCountry = (country) => {
@@ -392,6 +395,7 @@ const LoginScreen = ({navigation}) => {
     }
   
     const renderOTPlogin = () => {
+
   
       if (!loginWith) return;
   
@@ -506,8 +510,8 @@ const LoginScreen = ({navigation}) => {
                   {renderChooseLogin()}
                   {renderOTPlogin()}
 
-                  <View style={styles.leftBall}></View>
-                  <View style={styles.rightBall}></View>
+                  {/* <View style={styles.leftBall}></View>
+                  <View style={styles.rightBall}></View> */}
   
                   </View>
                 </TouchableWithoutFeedback>
