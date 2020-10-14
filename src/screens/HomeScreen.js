@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import moment from 'moment-with-locales-es6';
@@ -6,6 +6,7 @@ import FadeInView from '../components/animations/component/fade-in-view'
 import { getAppPoint } from '../services/index'
 import {darkGray} from '../helpers/colors'
 import {RATIO_X, RATIO_Y } from '../helpers/dimension'
+import {AFTER_FIRST_QUESTIONNAIRE, AFTER_TWO_MONTHS, AFTER_YEARS} from '../helpers/constants'
 import Navbar from '../components/navbar/component'
 import Button from '../components/button/component'
 import SimpleButton from '../components/simple-button/component'
@@ -18,6 +19,9 @@ const HomeScreen = ({navigation}) => {
     const [isDisabled, setIsDisabled] = useState(false)
     const [lastCheckUp, setLastCheckUp] = useState('')
     const oneMonth = 2592000000
+
+
+    console.log('SHOw', showWarning);
 
     useEffect(() => {
         async function tryLastCheckUp() {
@@ -41,6 +45,11 @@ const HomeScreen = ({navigation}) => {
         
 
         tryLastCheckUp()
+
+
+        return () => {
+          setShowWarning(false)
+        }
         
     }, [])
 
@@ -67,10 +76,10 @@ const HomeScreen = ({navigation}) => {
               } else {
                 if ( response.app_point && (response.app_point == AFTER_YEARS || response.app_point == AFTER_TWO_MONTHS ) ){
                   let data = {app_point: response.app_point}
-                //   Actions.question_stop_smoking(data)
+                  setShowWarning(false)
                   navigation.navigate('QuestionStopSmoking', {data})
                 }else{
-                //   Actions.questionnaire()
+                  setShowWarning(false)
                   navigation.navigate('Questionnaire')
                 }
               }
@@ -140,7 +149,7 @@ const HomeScreen = ({navigation}) => {
                     info="Retrouver vos résultats"
                     image={require('../../assets/History.png')}
                     // onPress={() => Actions.history()}
-                    onPress={() => console.log('Go to history')}
+                    onPress={() => navigation.navigate('History')}
                   />
                   
                 </View>

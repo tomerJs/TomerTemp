@@ -23,20 +23,27 @@ const QuestionnaireScreen = ({navigation}) => {
     let oldAnswerSelectedParam = navigation.getParam('oldAnswerSelected')
     let comeBackParam = navigation.getParam('comeBack')
 
+
+    const validateState = () => {
+      if(comeBackParam){
+        const lastIndex = questionnaire.length - 1
+        setIndexState(lastIndex)
+        setQuestion(questionnaire[lastIndex])
+        removeAnswer(questionnaire[lastIndex].number)
+      }
+
+      if(modifyResponseParam){
+          setIndexState(indexParam)
+          setQuestion(questionnaire[indexParam])
+      }
+    }
+
     useEffect(() => {
-        if(comeBackParam){
-            const lastIndex = questionnaire.length - 1
-            setIndexState(lastIndex)
-            setQuestion(questionnaire[lastIndex])
-            removeAnswer(questionnaire[lastIndex].number)
-        }
+        validateState()
+    }, [modifyResponseParam, indexParam])
 
-        if(modifyResponseParam){
-            setIndexState(indexParam)
-            setQuestion(questionnaire[indexParam])
-        }
-    }, [comeBackParam, modifyResponseParam])
 
+    
 
     const _goBack = () => {
         if (indexState === 0) {

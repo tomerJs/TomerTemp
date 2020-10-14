@@ -4,13 +4,14 @@ import {Context as QuestionContext} from '../context/QuestionContext'
 import {Context as AuthCotext} from '../context/AuthContext'
 import { sendQuestionnaire, checkAlert } from '../services/index'
 import AsyncStorage from '@react-native-community/async-storage';
-import moment from 'moment/min/moment-with-locales'
 import {darkGray} from '../helpers/colors'
 import {RATIO_X, RATIO_Y } from '../helpers/dimension'
+import {AFTER_FIRST_QUESTIONNAIRE, HOUR_FOR_NOTIFICATION, MINUTE_FOR_NOTIFICATION } from '../helpers/constants'
 import Navbar from '../components/navbar/component'
 import ResponsesList from '../components/responses-list/component'
 import SimpleButton from '../components/simple-button/component'
 import Loader from '../components/loader/component'
+import moment from 'moment/min/moment-with-locales'
 
 
 const SummaryScreen = ({navigation}) => {
@@ -43,16 +44,16 @@ const SummaryScreen = ({navigation}) => {
                // Cancel all old notifications and add 2 new notifications (for 2 consecutive days).
                 // pushNotifications.cancelAllLocalNotifications()
 
-                // const returnDate = response.date_for_next_questionnaire
+                const returnDate = response.date_for_next_questionnaire
 
-                // let dateForFirstNotification = moment(returnDate, 'DDMMYYYY')
-                // dateForFirstNotification.set({h: HOUR_FOR_NOTIFICATION, m: MINUTE_FOR_NOTIFICATION})
+                let dateForFirstNotification = moment(returnDate, 'DDMMYYYY')
+                dateForFirstNotification.set({h: HOUR_FOR_NOTIFICATION, m: MINUTE_FOR_NOTIFICATION})
                 // pushNotifications.localNotificationSchedule(dateForFirstNotification.toDate())
                 
 
                 /////////////// test /////////////////
-                // let date = moment('15/03/2020', 'DDMMYYYY');
-                // date.set({h: 11, m: 30});
+                let date = moment('15/03/2020', 'DDMMYYYY');
+                date.set({h: 11, m: 30});
                 // pushNotifications.localNotificationSchedule(date.toDate())
                 /////////////// end test /////////////////
 
@@ -60,8 +61,8 @@ const SummaryScreen = ({navigation}) => {
 
 
 
-                // const numberOfMonthForNextQuestionnaire = dateForFirstNotification.diff(moment(), 'months')
-                // const dateForSecondNotification = dateForFirstNotification.add(2, 'months')
+                const numberOfMonthForNextQuestionnaire = dateForFirstNotification.diff(moment(), 'months')
+                const dateForSecondNotification = dateForFirstNotification.add(2, 'months')
                 
                 // pushNotifications.localNotificationSchedule(dateForSecondNotification.toDate())
             
@@ -74,11 +75,11 @@ const SummaryScreen = ({navigation}) => {
                 } else {
                     //Check this out 
                     // resetAnswers()
-
+  
                     let dataToAction = {algoResults: alretResponse.alerts}
                     let nextScreen = 'Result'
                     if ( response.hasOwnProperty('app_point') && response.app_point == AFTER_FIRST_QUESTIONNAIRE ) {
-                      nextScreen = 'question_stop_smoking'
+                      nextScreen = 'QuestionStopSmoking'
                       dataToAction.app_point = response.app_point
                       dataToAction.dataForResult = {
                         algoResults: alretResponse.alerts,
@@ -92,9 +93,7 @@ const SummaryScreen = ({navigation}) => {
                       }
                     }
 
-                    console.log('nextScreen', nextScreen);
-                    console.log('dataToAction', dataToAction);
-
+                    console.log('nextScreen!!!', nextScreen);
                     navigation.navigate(nextScreen, dataToAction)
                 }
             }

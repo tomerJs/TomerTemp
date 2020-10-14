@@ -15,11 +15,13 @@ import StepConsentScreen from './src/screens/StepConsentScreen'
 import StepInfoScreen from './src/screens/StepInfoScreen'
 import StepFormUserScreen from './src/screens/StepFormUserScreen'
 import StepSummaryScreen from './src/screens/StepSummaryScreen'
-import { LogBox } from 'react-native';
 import LegalScreen from './src/screens/LegalScreen'
 import QuestionnaireScreen from './src/screens/QuestionnaireScreen'
 import SummaryScreen from './src/screens/SummaryScreen'
 import ResultScreen from './src/screens/ResultScreen';
+import PreventionScreen from './src/screens/PreventionScreen';
+import QuestionStopSmokingScreen from './src/screens/QuestionStopSmokingScreen';
+import HistoryScreen from './src/screens/HistoryScreen';
 
 
 
@@ -42,7 +44,10 @@ const stackNavigator = createSwitchNavigator({
     Legal: LegalScreen,
     Questionnaire: QuestionnaireScreen,
     Summary: SummaryScreen,
-    Result: ResultScreen
+    Result: ResultScreen,
+    Prevention: PreventionScreen,
+    QuestionStopSmoking: QuestionStopSmokingScreen,
+    History: HistoryScreen
   })
 
 })
@@ -50,7 +55,6 @@ const stackNavigator = createSwitchNavigator({
 const App = createAppContainer(stackNavigator)
 
 export default () => {
-  // LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
   return (
     <AuthProvider>
       <QuestionProvider>
