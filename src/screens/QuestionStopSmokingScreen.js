@@ -16,7 +16,6 @@ import {sendQuestionStopSmoking} from '../services/index'
 
 
 const QuestionStopSmokingScreen = (props) => {
-    console.log('PROPs', props);
     const appPoint = props.navigation.state.params.app_point
     const [questionState, setQuestionState] = useState(STOP_SMOKING_QUESTION_AFTER_FIRST_QUESTIONNAIRE)
     const [ans_1State, setAns_1State] = useState(null)

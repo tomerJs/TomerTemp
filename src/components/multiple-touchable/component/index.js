@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {
   View,
   Text,
@@ -12,12 +12,13 @@ import styles from '../styles'
 const MultipleTouchable = (props) => {
     const [answerPressed, setAnswerPressed] = useState(props.response)
 
+
     useEffect(() => {
         checkProps()
-    }, [props.response])
+    }, [props])
 
     const checkProps = ()=> {
-        if (props.response) {
+        if (props.hasOwnProperty('response')) {
             setAnswerPressed(props.response)
         }
     }
@@ -26,6 +27,7 @@ const MultipleTouchable = (props) => {
             <NavigationEvents onWillFocus={checkProps}/>
             {props.question.answers.map((answer, index) => {
                 let wasPressed = answerPressed == answer.value
+              
                 return (
                     <TouchableOpacity
                         key={`button_choice_${answer.answer}`}
@@ -37,12 +39,17 @@ const MultipleTouchable = (props) => {
                                 index > 0 ? (props.twoAnswer ? {marginLeft: 18} : {marginTop: 14}) : {},
                                 ]}
                         onPress={() => {
+                            const callOnPress = () => {props.onPress(answer.value)}
+
                             setAnswerPressed(answer.value)
-                            callOnPress = () => {props.onPress(answer.value)}
-            
+                
                             setTimeout(function () {
                                 callOnPress()
                             }, 200);
+            
+                            // setTimeout(function () {
+                            //     callOnPress()
+                            // }, 200);
                         }}>
             
                         {props.embeddedImage ?

@@ -38,7 +38,7 @@ const Footer = (props) =>  {
         easing: Easing.inOut(Easing.ease),
         duration: 400,
         toValue: width,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start()
     }
   }, [props.index])
@@ -56,7 +56,7 @@ const Footer = (props) =>  {
           {props.index} sur {props.nbOfQuestions}
         </Text>
         <View style={styles.progressBar} >
-          <Animated.View style={[styles.progressBarActive]}></Animated.View>
+          <Animated.View style={[styles.progressBarActive, {width: fillWidth}]}></Animated.View>
         </View>
       </View>
     </View>

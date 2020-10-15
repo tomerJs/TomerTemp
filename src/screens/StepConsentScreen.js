@@ -77,6 +77,10 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
     },
+    wrapperButton: {
+      marginTop: 44 * RATIO_Y,
+      alignItems: 'center',
+    },
     wrapperInfo: {
         flex: 1,
         paddingTop: 30 * RATIO_Y,

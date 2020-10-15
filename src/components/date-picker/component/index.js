@@ -13,7 +13,6 @@ const DateComponent = (props) =>  {
   // moment.locale('fr')
   let date = props.date ? new Date(props.date) : new Date()
   const [value, setDateState] = useState(date)
-
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || value;
     setDateState(currentDate);
@@ -26,7 +25,7 @@ const DateComponent = (props) =>  {
         <DateTimePicker
           style={{width:'100%'}}
           testID="dateTimePicker"
-          timeZoneOffsetInMinutes={0}
+          // timeZoneOffsetInMinutes={0}
           value={value}
           mode={'date'}
           is24Hour={true}

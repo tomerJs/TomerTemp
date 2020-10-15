@@ -4,8 +4,6 @@ import {RATIO_X, RATIO_Y} from '../helpers/dimension'
 import {darkGray} from '../helpers/colors'
 
 const SuccessLogin = ({navigation}) => {
-    console.log('2342342');
-
     useEffect(() => {
         setTimeout(
             () =>

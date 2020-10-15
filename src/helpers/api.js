@@ -54,8 +54,7 @@ export const getDataPackage = (dataToSend, token, method='POST') => {
   if (token) {
       headers['Authorization'] = 'Token ' + token
   }
-  console.log('headers', headers);
-  console.log(JSON.stringify(data));
+
   dataPackage = {
     method: method,
     headers: headers,

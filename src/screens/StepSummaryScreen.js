@@ -8,20 +8,19 @@ import Navbar from '../components/navbar/component'
 import SimpleButton from '../components/simple-button/component'
 import questionnaire from '../config/user-info'
 import { addSmoker } from '../services/index'
+import moment from 'moment'
 
 
 
 const StepSummaryScreen = ({navigation}) => {
     const [isLoading, setIsLoading] = useState(false)
     const {saveUser} = useContext(AuthContext)
-
-    const user  = navigation.getParam('user')
-
+    const _user  = navigation.getParam('user')
 
     const confirm = async () => {
         try {
            setIsLoading(true)
-           const response = await addSmoker(user);
+           const response = await addSmoker(_user);
            if (response.status == 400) {
                 return failed(response.error)
             }
@@ -30,8 +29,8 @@ const StepSummaryScreen = ({navigation}) => {
             }
             else {
                 setIsLoading(false)
-                AsyncStorage.setItem('user', JSON.stringify(user))
-                saveUser(user)
+                AsyncStorage.setItem('user', JSON.stringify(_user))
+                saveUser(_user)
                 navigation.navigate('Home')
                 // Actions.home()
             }
@@ -54,6 +53,8 @@ const StepSummaryScreen = ({navigation}) => {
     }
 
     const renderSmokerInformation = (user) => {
+      let validBirthDate = moment(user.date_of_stop_smoking, 'MM/DD/YYYY',true).isValid() ? moment(user.date_of_stop_smoking).format("DD/MM/YYYY") : user.date_of_stop_smoking
+
         const dateOfStopSmoking = (
                 <TouchableOpacity accessibilityLabel={`button_date_stop_smoking`}
                     style={styles.contentSummary}
@@ -61,13 +62,14 @@ const StepSummaryScreen = ({navigation}) => {
                     onPress={() => navigation.navigate("StepFormUser", {questionIndex: 3, modifyResponse: true, user} )}
                    >
                    <Text accessibilityLabel={`text_date_stop_smoking`} style={styles.mediumText}>Depuis le</Text>
-                   <Text accessibilityLabel={`text_value_date_stop_smoking`} style={styles.smallText}>{user.date_of_stop_smoking}</Text>
+                   <Text accessibilityLabel={`text_value_date_stop_smoking`} style={styles.smallText}>{validBirthDate}</Text>
                 </TouchableOpacity> 
           )
         return user.smoker ? null : dateOfStopSmoking
     }
 
     const renderUser = (user) => {
+      let validBirthDate = moment(user.birth_date, 'MM/DD/YYYY',true).isValid() ? moment(user.birth_date).format("DD/MM/YYYY") : user.birth_date 
         return (
           <View style={styles.summaryUserWrapper}>
     
@@ -88,7 +90,7 @@ const StepSummaryScreen = ({navigation}) => {
               onPress={() => navigation.navigate("StepFormUser", {questionIndex: 1, modifyResponse: true, user} )}
              >
               <Text accessibilityLabel={`text_birth_date`} style={styles.mediumText}>{user.gender === 0 ? 'Né le' : 'Née le'}</Text>
-              <Text accessibilityLabel={`text_value_birth_date`} style={styles.smallText}>{user.birth_date}</Text>
+              <Text accessibilityLabel={`text_value_birth_date`} style={styles.smallText}>{validBirthDate}</Text>
             </TouchableOpacity>
     
             <TouchableOpacity accessibilityLabel={`button_smoker`}
@@ -157,11 +159,11 @@ const StepSummaryScreen = ({navigation}) => {
                 <ScrollView>
                     <Text accessibilityLabel={`text_Confirm your information`} style={styles.title}>Confirmez vos informations</Text>
                     <Text accessibilityLabel={`text_you_are`} style={styles.title}>Vous êtes :</Text>
-                    {renderUser(user)}
+                    {renderUser(_user)}
                     <SimpleButton
                     style={{alignSelf: 'center', marginTop: 15}}
                     title="Confirmer"
-                    onPress={() => confirm(user)}
+                    onPress={() => confirm(_user)}
                     />
                 </ScrollView>
             </View>

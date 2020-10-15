@@ -21,8 +21,6 @@ const HomeScreen = ({navigation}) => {
     const oneMonth = 2592000000
 
 
-    console.log('SHOw', showWarning);
-
     useEffect(() => {
         async function tryLastCheckUp() {
             try {

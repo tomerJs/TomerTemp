@@ -2,7 +2,6 @@ import React, {useState, useContext, useEffect} from 'react'
 import { Text, View, StyleSheet, TextInput } from 'react-native'
 import questionnaire from '../config/user-info';
 import {Context as AuthContext} from '../context/AuthContext'
-import {Context as QuestionContext} from '../context/QuestionContext'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DatePicker from '../components/date-picker/component'
 import Navbar from '../components/navbar/component'
@@ -12,7 +11,7 @@ import MultipleTouchable from '../components/multiple-touchable/component'
 import SimpleButton from '../components/simple-button/component'
 import {darkGray} from '../helpers/colors'
 import {RATIO_X, RATIO_Y } from '../helpers/dimension'
-import { NavigationEvents } from 'react-navigation';
+import moment from 'moment'
 
 const StepFormUserScreen = ({navigation}) => {
     const [questionIndexState, setQuestionIndexState] = useState(0)
@@ -33,11 +32,6 @@ const StepFormUserScreen = ({navigation}) => {
         }
     }, [questionIndex, modifyResponse, questionIndexState])
 
-
-    const handleBackButton = () => {
-        return true
-    }
-
     const nextQuestion = (id, value) => {
         let _questionIndex = questionIndexState + 1
         let user = userProp ? userProp : userState
@@ -47,17 +41,20 @@ const StepFormUserScreen = ({navigation}) => {
         responses[id] = value
     
         if(modifyResponse){
+          
           if (id === 0) {
             user.gender = value
           } else if (id === 1) {
-            let __val = value.toISOString().split('T')[0].split('-')
-            let parsed = __val[2] + '/' + __val[1] + '/' + __val[0]
+            let parsed = moment(value).format("DD/MM/YYYY")
+            // let __val = value.split('T')[0].split('-')
+            // let parsed = __val[2] + '/' + __val[1] + '/' + __val[0]
             user.birth_date = parsed
           } else if (id === 2) {
             user.smoker = value
           } else if (id === 3) {
-            let __val = value.toISOString().split('T')[0].split('-')
-            let parsed = __val[2] + '/' + __val[1] + '/' + __val[0]
+            let parsed = moment(value).format("DD/MM/YYYY")
+            // let __val = value.split('T')[0].split('-')
+            // let parsed = __val[2] + '/' + __val[1] + '/' + __val[0]
             user.date_of_stop_smoking = parsed
           } else if (id === 4) {
             user.number_of_year_tabacco = value
@@ -73,9 +70,8 @@ const StepFormUserScreen = ({navigation}) => {
           if (id === 0) {
             user.gender = value
           } else if (id === 1) {
-            let __val = value.toISOString().split('T')[0].split('-')
-            let parsed = __val[2] + '/' + __val[1] + '/' + __val[0]
-            user.birth_date = parsed
+            user.birth_date = value
+
           } else if (id === 2) {
             user.smoker = value
             if (value === 1) {
@@ -86,9 +82,7 @@ const StepFormUserScreen = ({navigation}) => {
               }
             }
           } else if (id === 3) {
-            let __val = value.toISOString().split('T')[0].split('-')
-            let parsed = __val[2] + '/' + __val[1] + '/' + __val[0]
-            user.date_of_stop_smoking = parsed
+            user.date_of_stop_smoking = value
           } else if (id === 4) {
             user.number_of_year_tabacco = value
           } else if (id === 5) {
@@ -103,7 +97,6 @@ const StepFormUserScreen = ({navigation}) => {
             user.city = value
           }
         }
-        console.log('USER', user);
    
         if (_questionIndex > 7 || modifyResponse) {
             navigation.navigate('StepSummary', {user})
@@ -122,7 +115,7 @@ const StepFormUserScreen = ({navigation}) => {
         }
         if (_questionIndex < 0) {
         //   Actions.pop()
-            navigation.goBack()
+            navigation.pop()
         } else {
           setQuestionIndexState(_questionIndex)
         }
@@ -205,7 +198,6 @@ const StepFormUserScreen = ({navigation}) => {
                   </View>
               )
             case 'SELECT':
-              ;
                 return (<MultipleTouchable
                     question={question}
                     response={responsesState[question.id]}

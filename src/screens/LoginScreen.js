@@ -1,6 +1,5 @@
-import React, {useContext, useEffect, useState, useRef} from 'react'
+import React, {useContext, useState, useRef} from 'react'
 import {Context as AuthContext } from '../context/AuthContext'
-import { sha256 } from 'react-native-sha256';
 import CountryPicker from 'react-native-country-picker-modal';
 import Navbar from '../components/navbar/component'
 import Loader from '../components/loader/component'
@@ -15,13 +14,12 @@ import {
   Platform,
   Alert,
   TouchableWithoutFeedback, 
-  StyleSheet,
-  SafeAreaView 
+  StyleSheet, 
 } from 'react-native';
 import Constants from 'expo-constants';
 import { sendOtp, checkOtp } from '../services/index'
-import {blue, darkGray, lightGray, gray} from '../helpers/colors'
-import {RATIO_X, RATIO_Y, RATIO } from '../helpers/dimension'
+import {blue, darkGray, lightGray} from '../helpers/colors'
+import {RATIO_X, RATIO_Y } from '../helpers/dimension'
 
 const MAX_LENGTH_CODE = 6;
 const MAX_LENGTH_NUMBER = 20;
@@ -114,11 +112,7 @@ const LoginScreen = ({navigation}) => {
         }
         let bundleId =  Constants.deviceId;
         
-        try {
-          console.log('111111111111', loginInput);
-          
-          // const sendOtpToken = await sha256(`${bundleId}#${loginInput}`)
-    
+        try {  
           const response = await sendOtp(data, bundleId)
 
           setIsLoading(false)
@@ -143,9 +137,8 @@ const LoginScreen = ({navigation}) => {
             "otp_token": code,
             "token": token
         }
-        console.log('verifyCode#####', data);
+
         const response = await checkOtp(data)
-        console.log('RES!!!', response);
         if (response.status !== 200) {
           failed(response.error)
 
@@ -157,8 +150,6 @@ const LoginScreen = ({navigation}) => {
 
             if (response.hasOwnProperty('seconds_to_enable_generation')) {
               // User is blocked.
-              // stateToChange['isBlocked'] = true
-              // stateToChange['blockingDuration'] = response.seconds_to_enable_generation
               setIsBlocked(true)
               setBlockingDuration(response.seconds_to_enable_generation)
             }
@@ -167,7 +158,6 @@ const LoginScreen = ({navigation}) => {
           }
           return
         } else {
-          console.log('######################', response);
           setIsLoading(false)
           setEnterCode(true)
           AsyncStorage.setItem('token', token)
@@ -175,14 +165,9 @@ const LoginScreen = ({navigation}) => {
           if (smoker) {
             saveUser(smoker)
             AsyncStorage.setItem('user', JSON.stringify(smoker))
-
-            // Actions.home()
             navigation.navigate('Home')
           } else {
-            console.log('SuccessLogin222222', response);
             navigation.navigate('SuccessLogin')
-
-              // Actions.successLogin()
           }
         }
 
@@ -445,7 +430,7 @@ const LoginScreen = ({navigation}) => {
               keyboardType={keyboardType}
               style={[ styles.textInput, textStyle ]}
               returnKeyType='go'
-              placeholderTextColor={enterCode ? '#f8f9f8' : 'blue'}
+              placeholderTextColor={enterCode ? lightGray : blue}
               selectionColor={'#4A90E2'}
               maxLength={maxLength()}
               onSubmitEditing={getSubmitAction} />
@@ -509,9 +494,6 @@ const LoginScreen = ({navigation}) => {
   
                   {renderChooseLogin()}
                   {renderOTPlogin()}
-
-                  {/* <View style={styles.leftBall}></View>
-                  <View style={styles.rightBall}></View> */}
   
                   </View>
                 </TouchableWithoutFeedback>
@@ -671,25 +653,6 @@ const styles = StyleSheet.create({
       height: 200 * RATIO_Y,
       resizeMode: 'contain',
   },
-  leftBall: {
-    position: "absolute",
-    bottom: -20,
-    left: -30,
-    height: 100,
-    width: 100,
-    borderRadius: 50,
-    backgroundColor: blue,
-  },
-
-  rightBall: {
-    position: "absolute",
-    bottom: -70,
-    right: -75,
-    height: 250,
-    width: 250,
-    borderRadius: 125,
-    backgroundColor: blue,
-  }
 })
 
 export default LoginScreen

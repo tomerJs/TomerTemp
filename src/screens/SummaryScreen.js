@@ -12,6 +12,7 @@ import ResponsesList from '../components/responses-list/component'
 import SimpleButton from '../components/simple-button/component'
 import Loader from '../components/loader/component'
 import moment from 'moment/min/moment-with-locales'
+import * as pushNotifications from '../services/pushNotifications'
 
 
 const SummaryScreen = ({navigation}) => {
@@ -21,7 +22,6 @@ const SummaryScreen = ({navigation}) => {
     const user = authContext.state.user
     
     const failed = (message = null) =>  {
-        console.log('MESSAGE', message);
         if (!message) {
             message = 'Une erreur est survenue, Veuillez essayer ultérieurement'
         }
@@ -42,18 +42,18 @@ const SummaryScreen = ({navigation}) => {
 
 
                // Cancel all old notifications and add 2 new notifications (for 2 consecutive days).
-                // pushNotifications.cancelAllLocalNotifications()
+                pushNotifications.cancelAllLocalNotifications()
 
                 const returnDate = response.date_for_next_questionnaire
 
                 let dateForFirstNotification = moment(returnDate, 'DDMMYYYY')
-                dateForFirstNotification.set({h: HOUR_FOR_NOTIFICATION, m: MINUTE_FOR_NOTIFICATION})
-                // pushNotifications.localNotificationSchedule(dateForFirstNotification.toDate())
+                dateForFirstNotification.set({hour: HOUR_FOR_NOTIFICATION, minute: MINUTE_FOR_NOTIFICATION})
+                pushNotifications.localNotificationSchedule(dateForFirstNotification.toDate())
                 
 
                 /////////////// test /////////////////
-                let date = moment('15/03/2020', 'DDMMYYYY');
-                date.set({h: 11, m: 30});
+                // let date = moment('15/10/2020', 'DDMMYYYY');
+                // date.set({hour: 12, minute: 14});
                 // pushNotifications.localNotificationSchedule(date.toDate())
                 /////////////// end test /////////////////
 
@@ -63,8 +63,7 @@ const SummaryScreen = ({navigation}) => {
 
                 const numberOfMonthForNextQuestionnaire = dateForFirstNotification.diff(moment(), 'months')
                 const dateForSecondNotification = dateForFirstNotification.add(2, 'months')
-                
-                // pushNotifications.localNotificationSchedule(dateForSecondNotification.toDate())
+                pushNotifications.localNotificationSchedule(dateForSecondNotification.toDate())
             
 
 
@@ -73,9 +72,7 @@ const SummaryScreen = ({navigation}) => {
                 if(alretResponse.status !== 200){
                     return failed(alretResponse.error)
                 } else {
-                    //Check this out 
-                    // resetAnswers()
-  
+                    resetAnswers()
                     let dataToAction = {algoResults: alretResponse.alerts}
                     let nextScreen = 'Result'
                     if ( response.hasOwnProperty('app_point') && response.app_point == AFTER_FIRST_QUESTIONNAIRE ) {
@@ -92,8 +89,7 @@ const SummaryScreen = ({navigation}) => {
                         number_of_month_for_next_questionnaire: numberOfMonthForNextQuestionnaire,
                       }
                     }
-
-                    console.log('nextScreen!!!', nextScreen);
+                    
                     navigation.navigate(nextScreen, dataToAction)
                 }
             }

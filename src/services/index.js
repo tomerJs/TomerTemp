@@ -27,7 +27,6 @@ export function sendOtp(data, sendOtpToken) {
   return fetch(apiSendOtp, dataToSend)
     .then(response => response.json())
     .then(res => {
-      console.log(JSON.stringify(res))
       return res
     })
     .catch(error => {
@@ -43,7 +42,6 @@ export async function getAppPoint(data) {
     .then(response => response.json())
     
     .then(res => {
-      console.log(JSON.stringify(res))
       return res
     })
     .catch(error => {
@@ -57,7 +55,6 @@ export function checkOtp(data) {
   return fetch(apiCheckOtp, dataToSend)
     .then(response => response.json())
     .then(res => {
-      console.log(JSON.stringify(res))
       return res
     })
     .catch(error => {
@@ -73,7 +70,6 @@ export async function addSmoker(data) {
   return fetch(apiAddSmoker, dataToSend)
     .then(response => response.json())
     .then(res => {
-      console.log(JSON.stringify(res))
       return res
     })
     .catch(error => {
@@ -89,7 +85,6 @@ export async function sendQuestionnaire(data) {
   return fetch(apiSendQuestionnaire, dataToSend)
     .then(response => response.json())
     .then(res => {
-      console.log(JSON.stringify(res))
       return res
     })
     .catch(error => {
@@ -104,7 +99,6 @@ export async function checkAlert(data) {
   return fetch(apiCheckAlert, dataToSend)
     .then(response => response.json())
     .then(res => {
-      console.log(JSON.stringify(res))
       return res
     })
     .catch(error => {
@@ -119,7 +113,6 @@ export async function getHistory(data) {
   return fetch(apiGetHistory, dataToSend)
     .then(response => response.json())
     .then(res => {
-      console.log(JSON.stringify(res))
       return res
     })
     .catch(error => {
@@ -134,7 +127,6 @@ export async function sendQuestionStopSmoking(data) {
   return fetch(apiSendQuestionStopSmoking, dataToSend)
     .then(response => response.json())
     .then(res => {
-      console.log(JSON.stringify(res))
       return res
     })
     .catch(error => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import 'react-native-gesture-handler';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
@@ -22,6 +22,7 @@ import ResultScreen from './src/screens/ResultScreen';
 import PreventionScreen from './src/screens/PreventionScreen';
 import QuestionStopSmokingScreen from './src/screens/QuestionStopSmokingScreen';
 import HistoryScreen from './src/screens/HistoryScreen';
+import * as pushNotifications from './src/services/pushNotifications'
 
 
 
@@ -55,6 +56,20 @@ const stackNavigator = createSwitchNavigator({
 const App = createAppContainer(stackNavigator)
 
 export default () => {
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
+
+    registerNotifications()
+    
+  }, []);
+
+  const registerNotifications = async () => {
+    await pushNotifications.registerForPushNotificationsAsync();
+  }
+
+
   return (
     <AuthProvider>
       <QuestionProvider>

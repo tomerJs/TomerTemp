@@ -1,36 +1,70 @@
-import PushNotification from 'react-native-push-notification'
-// import { PushNotificationIOS } from 'react-native'
-import PushNotificationIOS from "@react-native-community/push-notification-ios";
+import Constants from 'expo-constants';
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+import {Alert} from 'react-native'
+import { MINUTE_FOR_NOTIFICATION } from '../helpers/constants'
 import moment from 'moment/min/moment-with-locales'
 
-const configure = () => {
-  PushNotification.configure({
-    // (required) Called when a remote or local notification is opened or received
-    onNotification: function (notification) {
-      // process the notification
 
-      // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
-      notification.finish(PushNotificationIOS.FetchResult.NoData)
-    },
-  })
+let identifier;
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
+
+const registerForPushNotificationsAsync = async () => {
+  let token;
+  if (Constants.isDevice) {
+    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      Alert.alert('', 'Failed to get push token for push notification!')
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+  } else {
+    Alert.alert('', 'Must use physical device for Push Notifications')
+  }
+
+  if (Platform.OS === 'android') {
+    Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  return token;
 }
 
-const localNotificationSchedule = (date) => {
+const localNotificationSchedule = async (date) => {
   moment.locale('fr')
-
-  PushNotification.localNotificationSchedule({
-    title: 'Nouveau questionnaire SmokeCheck',
-    message: 'Merci de compléter votre nouveau questionnaire SmokeCheck.',
-    date: date,
-  })
+  const trigger = new Date(date.getTime()) 
+  identifier = await Notifications.scheduleNotificationAsync({
+    content: {
+      title: 'Nouveau questionnaire SmokeCheck',
+      body: 'Merci de compléter votre nouveau questionnaire SmokeCheck.',
+    },
+    trigger
+  });
 }
+
 
 const cancelAllLocalNotifications = () => {
-  PushNotification.cancelAllLocalNotifications()
+   Notifications.cancelScheduledNotificationAsync(identifier);
 }
 
 export {
- configure,
- localNotificationSchedule,
- cancelAllLocalNotifications,
-}
+  registerForPushNotificationsAsync,
+  localNotificationSchedule,
+  cancelAllLocalNotifications,
+ }

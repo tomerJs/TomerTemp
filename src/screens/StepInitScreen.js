@@ -8,7 +8,6 @@ import Navbar from '../components/navbar/component'
 import SimpleButton from '../components/simple-button/component'
 
 const StepInitScreen = ({navigation}) => {
-    console.log('StepInitScreen');
     return (
         <View style={styles.content}>
           <Navbar

@@ -2,15 +2,16 @@ import React, {useContext} from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import {darkGray, blue} from '../helpers/colors'
 import {RATIO_X, RATIO_Y } from '../helpers/dimension'
-import {Context as QuestionContext} from '../context/QuestionContext'
 import {Context as AuthCotext} from '../context/AuthContext'
+import {Context as QuestionContext} from '../context/QuestionContext'
 import Navbar from '../components/navbar/component'
 import SimpleButton from '../components/simple-button/component'
 
 
 const ResultScreen = (props) => {
     const {state: {user}} = useContext(AuthCotext)
-    console.log('PROPS', props.navigation.state.params);
+    const {resetAnswers} = useContext(QuestionContext)
+
     const algoResults = props.navigation.getParam('algoResults')
     let title = algoResults && algoResults.length > 0 ? 'Nous conseillons une consultation.' : 'Tout semble normal.'
 
