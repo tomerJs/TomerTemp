@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SmokeCheck2.0",
-    "slug": "SmokeCheck2.0",
+    "slug": "SmokeCheck",
+    "name": "SmokeCheck",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "SmokeCheck.com"
     }
   }
 }

@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="858ef57f-1ace-4876-aa98-1334cffbaca5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/animations/component/fade-in-view.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/animations/component/fade-in-view.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/animations/component/fade.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/animations/component/fade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/animations/component/from-side.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/animations/component/from-side.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/animations/component/spring-side.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/animations/component/spring-side.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/component/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/component/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/context/QuestionContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/QuestionContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/SplashScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/SplashScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/StepFormUserScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/StepFormUserScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,14 +10,17 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-12" />
-    <option name="y" value="-12" />
-    <option name="width" value="1944" />
-    <option name="height" value="1044" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-1695" />
+    <option name="y" value="265" />
+    <option name="width" value="1295" />
+    <option name="height" value="695" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -57,7 +44,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/SmokeCheck-c0c338acb3b44cfcb4aa62e1b48577d7-signed.apk" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunDashboard">
@@ -86,9 +73,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
+    <frame x="-1695" y="265" width="1295" height="695" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.3298887" />
+      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.33015114" />
       <window_info id="Structure" side_tool="true" />
       <window_info id="Image Layers" />
       <window_info id="Designer" />
@@ -105,6 +92,11 @@
       <window_info anchor="right" id="Theme Preview" />
       <window_info anchor="right" id="Palette&#9;" />
     </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/Downloads/SmokeCheck-c0c338acb3b44cfcb4aa62e1b48577d7-signed.apk">
+      <provider selected="true" editor-type-id="apk-viewer" />
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
